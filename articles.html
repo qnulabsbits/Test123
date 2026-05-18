@@ -1,446 +1,276 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Latest Articles - Qnulabs</title>
-
     <style>
-
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-
         
-
         body {
-
             font-family: 'Poppins', sans-serif;
-
-            background: #f8f9fa;
-
-            color: #333;
-
             margin: 0;
-
             padding: 40px 20px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e2937 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
 
+        /* Subtle Quantum Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 25% 30%, rgba(255, 102, 0, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 75% 70%, rgba(255, 102, 0, 0.06) 0%, transparent 50%),
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 90px 90px;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.65;
         }
 
         .container {
-
             max-width: 900px;
-
             margin: 0 auto;
-
+            position: relative;
         }
 
         h1 {
-
             color: #ff6600;
-
             text-align: center;
-
             margin-bottom: 10px;
-
+            text-shadow: 0 0 20px rgba(255, 102, 0, 0.4);
         }
-
         .subtitle {
-
             text-align: center;
-
-            color: #666;
-
+            color: #94a3b8;
             margin-bottom: 50px;
-
         }
-
         .back {
-
             color: #ff6600;
-
             text-decoration: none;
-
             font-weight: 500;
-
             display: inline-block;
-
             margin-bottom: 30px;
-
         }
-
         .back:hover { text-decoration: underline; }
 
         /* List View */
-
         .article-list {
-
             display: block;
-
         }
-
         .article-item {
-
-            background: white;
-
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(12px);
             padding: 22px 28px;
-
             margin: 18px 0;
-
-            border-radius: 12px;
-
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-
+            border-radius: 16px;
+            border: 1px solid rgba(255, 102, 0, 0.2);
             transition: all 0.3s;
-
             cursor: pointer;
-
         }
-
         .article-item:hover {
-
-            transform: translateY(-5px);
-
-            box-shadow: 0 8px 25px rgba(255, 102, 0, 0.15);
-
+            transform: translateY(-6px);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: #ff6600;
+            box-shadow: 0 10px 30px rgba(255, 102, 0, 0.25);
         }
-
         .article-item h2 {
-
-            color: #ff6600;
-
+            color: #ffddcc;
             margin: 0;
-
             font-size: 1.35rem;
-
         }
-
         .article-item .meta {
-
-            color: #666;
-
+            color: #94a3b8;
             font-size: 0.95rem;
-
             margin-top: 8px;
-
         }
 
         /* Detail View */
-
         .article-detail {
-
             display: none;
-
-            background: white;
-
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
             padding: 40px;
-
-            border-radius: 12px;
-
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-
+            border-radius: 16px;
+            border: 1px solid rgba(255, 102, 0, 0.25);
         }
-
         .article-detail h2 {
-
             color: #ff6600;
-
             font-size: 2rem;
-
             margin-bottom: 20px;
-
         }
-
         .meta {
-
-            color: #666;
-
+            color: #94a3b8;
             margin-bottom: 30px;
-
         }
-
         .section {
-
-            margin-bottom: 35px;
-
+            margin-bottom: 40px;
         }
-
         .section h3 {
-
-            color: #ff6600;
-
-            margin-bottom: 15px;
-
+            color: #ff8533;
+            margin-bottom: 18px;
+            font-size: 1.4rem;
         }
-
         .summary, .perspective {
-
-            line-height: 1.75;
-
-            color: #444;
-
+            line-height: 1.85;
+            color: #cbd5e1;
+        }
+        /* Make numbered lists look clean */
+        .summary ol, .perspective ol {
+            padding-left: 25px;
+            margin: 15px 0;
+        }
+        .summary li, .perspective li {
+            margin-bottom: 12px;
         }
 
         .btn {
-
             display: inline-block;
-
             padding: 14px 32px;
-
             background: #ff6600;
-
             color: white;
-
             text-decoration: none;
-
             border-radius: 50px;
-
             font-weight: 600;
-
             margin-top: 20px;
-
+            transition: all 0.3s;
         }
-
         .btn:hover {
-
             background: #ff8533;
-
+            transform: translateY(-3px);
         }
-
     </style>
-
 </head>
-
 <body>
-
     <div class="container">
-
         <a href="index.html" class="back">← Back to Home</a>
-
         
-
         <h1>Latest Articles</h1>
-
         <p class="subtitle">Quantum Security Perspectives</p>
 
         <!-- ARTICLE LIST -->
-
         <div id="articleList" class="article-list"></div>
 
         <!-- ARTICLE DETAIL -->
-
         <div id="articleDetail" class="article-detail">
-
             <a href="#" onclick="backToList()" class="back">← Back to Articles</a>
-
-            
-
             <div id="detailContent"></div>
-
         </div>
-
     </div>
 
     <script>
-
         const articlesData = [
-
             {
-
                 id: 1,
-
                 title: "QNu Labs Named Quantum Key Distribution Industry Leader",
-
                 date: "May 15, 2026",
-
                 dateObj: new Date("2026-05-15"),
-
                 source: "The Quantum Insider",
-
                 summary: `
-
-                    1.The Quantum Insider article reports that QNu Labs has been recognized as a “Global Established Leader” in the 2026 MarketsandMarkets 360Quadrants Quantum Key Distribution (QKD) evaluation.
-
-2.The evaluation reviewed more than 170 companies in the global quantum-safe cybersecurity ecosystem, with only 17 companies categorized as established leaders.
-
-3.The recognition highlights the growing importance of Quantum Key Distribution as governments and enterprises prepare for future cyber threats posed by quantum computing.
-
-4.QNu Labs was acknowledged for its end-to-end quantum-safe cybersecurity portfolio, including QKD, QRNG, PQC, and crypto-agile platforms designed for critical infrastructure protection.
-
-5.The company focuses on securing sectors such as government, defence, telecom, BFSI, healthcare, and critical infrastructure with deployment-ready quantum communication solutions.
-
-6.CEO Sunil Gupta emphasized that quantum-safe security is now a present-day necessity rather than a future concern, as organizations prepare for the quantum era.
-
-7.The article also positions QNu Labs as a major player in India’s indigenous quantum cybersecurity ecosystem, reinforcing the country’s push toward sovereign, scalable, and globally competitive quantum-safe infrastructure.
-
+                    The Quantum Insider article reports that QNu Labs has been recognized as a “Global Established Leader” in the 2026 MarketsandMarkets 360Quadrants Quantum Key Distribution (QKD) evaluation.
+                    The evaluation reviewed more than 170 companies in the global quantum-safe cybersecurity ecosystem, with only 17 companies categorized as established leaders.
+                    The recognition highlights the growing importance of Quantum Key Distribution as governments and enterprises prepare for future cyber threats posed by quantum computing.
+                    QNu Labs was acknowledged for its end-to-end quantum-safe cybersecurity portfolio, including QKD, QRNG, PQC, and crypto-agile platforms designed for critical infrastructure protection.
+                    The company focuses on securing sectors such as government, defence, telecom, BFSI, healthcare, and critical infrastructure with deployment-ready quantum communication solutions.
+                    CEO Sunil Gupta emphasized that quantum-safe security is now a present-day necessity rather than a future concern.
+                    The article also positions QNu Labs as a major player in India’s indigenous quantum cybersecurity ecosystem.
                 `,
-
                 perspective: `
-
-                    1. QNu Labs’ recognition validates India’s capability to build globally competitive quantum-safe cybersecurity technologies.<br><br>
-
-                    2. The article reinforces India’s need for sovereign quantum communication infrastructure, especially for defence, telecom, BFSI, and critical infrastructure.<br><br>
-
-                    3. Our integrated approach combining QKD, PQC, QRNG, and crypto-agility aligns with the global shift toward end-to-end quantum-safe ecosystems.<br><br>
-
-                    4. Global leadership now depends on deployment readiness, scalability, and ecosystem partnerships — not just research breakthroughs.<br><br>
-
-                    5. India can strengthen its position through standards adoption, indigenous manufacturing, and large-scale quantum network deployments.
-
+                    QNu Labs’ recognition validates India’s capability to build globally competitive quantum-safe cybersecurity technologies rather than depending entirely on imported solutions.
+                    The article reinforces India’s need for sovereign quantum communication infrastructure, especially for defence, telecom, BFSI, and critical infrastructure sectors.
+                    Our approach of combining QKD, PQC, QRNG, and crypto-agility into an integrated platform aligns with the global shift toward end-to-end quantum-safe ecosystems.
+                    Global leadership in quantum security now depends equally on deployment readiness, scalability, interoperability, and ecosystem partnerships.
+                    India can further strengthen its position by accelerating standards adoption, indigenous component manufacturing, public-private collaboration, and large-scale quantum network deployments.
                 `,
-
                 link: "https://thequantuminsider.com/2026/05/15/qnu-labs-global-quantum-key-distribution-leader/"
-
             },
-
             {
-
                 id: 2,
-
                 title: "Why Europe’s Quantum Future Depends on Talent Hubs, Not Just Tech Milestones",
-
                 date: "May 16, 2026",
-
                 dateObj: new Date("2026-05-16"),
-
                 source: "The Quantum Insider",
-
                 summary: `
-
-                  1. The article argues that Europe’s success in quantum computing will depend more on developing strong talent ecosystems than only achieving technical breakthroughs in qubits or hardware performance. 
-
-2. Quantum computing requires highly interdisciplinary collaboration involving physicists, engineers, software developers, cryogenic experts, infrastructure specialists, and industry professionals working together. 
-
-3. The author highlights the importance of “talent hubs” — concentrated ecosystems where universities, startups, investors, governments, and corporations collaborate closely and continuously exchange expertise. 
-
-4. European cities such as Delft, Copenhagen, Paris, Munich, and Innsbruck are emerging as major quantum innovation clusters where research rapidly transitions into real-world commercialization. 
-
-5. The article explains that the next phase of quantum computing is primarily a systems-engineering challenge involving orchestration of hardware, software, error correction, classical computing, and data infrastructure at scale. 
-
-6. Europe is seen as gaining momentum because of stronger startup ecosystems, growing infrastructure, specialized investment, and increased collaboration between academia and industry. 
-
-7. The author concludes that quantum technologies will scale successfully only if Europe invests early in education, workforce development, and quantum literacy across industries, creating enough skilled professionals to build and operate complex quantum systems. 
+                    The article argues that Europe’s success in quantum computing will depend more on developing strong talent ecosystems than only achieving technical breakthroughs.
+                    Quantum computing requires highly interdisciplinary collaboration involving physicists, engineers, software developers, cryogenic experts, and industry professionals.
+                    The author highlights the importance of “talent hubs” — concentrated ecosystems where universities, startups, investors, governments, and corporations collaborate.
+                    European cities such as Delft, Copenhagen, Paris, Munich, and Innsbruck are emerging as major quantum innovation clusters.
+                    The next phase of quantum computing is primarily a systems-engineering challenge.
+                    Europe is gaining momentum because of stronger startup ecosystems and collaboration between academia and industry.
+                    Quantum technologies will scale successfully only if Europe invests early in education and workforce development.
                 `,
-
                 perspective: `
-
-                    1. The article strongly reflects India’s current opportunity: building quantum talent ecosystems will be as important as developing quantum technologies themselves.<br><br>
-
-                    2. QNu Labs’ collaborations with academia, government, startups, and industry demonstrate the importance of interconnected innovation ecosystems.<br><br>
-
-                    3. India has strong foundational talent but needs deeper specialization in quantum hardware, photonics, cryogenics, and systems engineering.<br><br>
-
-                    4. Commercialization success depends on multidisciplinary collaboration and practical deployment experience.<br><br>
-
-                    5. India should create dedicated quantum innovation clusters and industry-led training programs.
-
+                    The article strongly reflects India’s current opportunity: building quantum talent ecosystems will be as important as developing quantum technologies themselves.
+                    QNu Labs’ collaborations with academia, government bodies, startups, and industry demonstrate the importance of creating interconnected innovation ecosystems.
+                    India has strong foundational talent in engineering, cryptography, and software, but requires deeper specialization in quantum hardware, photonics, cryogenics, and systems engineering.
+                    A key learning is that commercialization success in quantum technologies depends on multidisciplinary collaboration, workforce development, and practical deployment experience.
+                    India can improve by creating dedicated quantum innovation clusters, increasing industry-led training programs, supporting startup incubation, and enabling faster transition from research to real-world deployment.
                 `,
-
                 link: "https://thequantuminsider.com/2026/05/16/guest-post-why-europes-quantum-future-depends-on-talent-hubs-not-just-tech-milestones/"
-
             }
-
         ];
 
-        // Sort articles by date (newest first)
-
         function renderArticleList() {
-
             const sortedArticles = [...articlesData].sort((a, b) => b.dateObj - a.dateObj);
-
-            
-
             const listContainer = document.getElementById('articleList');
-
             listContainer.innerHTML = '';
 
             sortedArticles.forEach(article => {
-
                 const div = document.createElement('div');
-
                 div.className = 'article-item';
-
                 div.innerHTML = `
-
                     <h2>${article.title}</h2>
-
                     <p class="meta">${article.date} • ${article.source}</p>
-
                 `;
-
                 div.onclick = () => showArticle(article.id);
-
                 listContainer.appendChild(div);
-
             });
-
         }
 
         function showArticle(id) {
-
             const article = articlesData.find(a => a.id === id);
-
             if (!article) return;
 
             const content = `
-
                 <h2>${article.title}</h2>
-
                 <p class="meta"><strong>Date:</strong> ${article.date} &nbsp;&nbsp; | &nbsp;&nbsp; <strong>Source:</strong> ${article.source}</p>
-
                 
-
                 <div class="section">
-
                     <h3>Summary</h3>
-
-                    <p class="summary">${article.summary}</p>
-
+                    <div class="summary">
+                        <ol>${article.summary.trim().split('\n').map(line => `<li>${line.trim()}</li>`).join('')}</ol>
+                    </div>
                 </div>
-
                 
-
                 <div class="section">
-
                     <h3>QNu Labs Perspective</h3>
-
-                    <p class="perspective">${article.perspective}</p>
-
+                    <div class="perspective">
+                        <ol>${article.perspective.trim().split('\n').map(line => `<li>${line.trim()}</li>`).join('')}</ol>
+                    </div>
                 </div>
-
                 
-
                 <a href="${article.link}" target="_blank" class="btn">Read Original Article →</a>
-
             `;
-
             
-
             document.getElementById('detailContent').innerHTML = content;
-
             document.getElementById('articleList').style.display = 'none';
-
             document.getElementById('articleDetail').style.display = 'block';
-
         }
 
         function backToList() {
-
             document.getElementById('articleList').style.display = 'block';
-
             document.getElementById('articleDetail').style.display = 'none';
-
         }
 
-        // Initialize
-
         window.onload = renderArticleList;
-
     </script>
-
 </body>
-
 </html>
