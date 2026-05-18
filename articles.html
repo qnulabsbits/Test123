@@ -5,32 +5,121 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Latest Articles - Qnulabs</title>
     <style>
-        body { font-family: 'Poppins', sans-serif; padding: 40px; background: #f8f9fa; }
-        h1 { color: #ff6600; }
-        .article { 
-            background: white; 
-            padding: 20px; 
-            margin: 15px auto; 
-            max-width: 800px; 
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #ff6600;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 50px;
+            font-size: 1.3rem;
+        }
+        .article {
+            background: white;
+            padding: 30px;
+            margin: 25px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .article h2 {
+            color: #ff6600;
+            margin-top: 0;
+        }
+        .meta {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+        .summary, .perspective {
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+        .section-title {
+            color: #ff6600;
+            font-size: 1.2rem;
+            margin: 25px 0 10px 0;
+        }
+        .read-more {
+            color: #ff6600;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .read-more:hover {
+            text-decoration: underline;
+        }
+        .back {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #ff6600;
+            text-decoration: none;
+            font-weight: 500;
         }
     </style>
 </head>
 <body>
-    <h1>Latest Articles</h1>
-    <p>Quantum Security Insights</p>
-    
-    <div class="article">
-        <h2>Article Title 1</h2>
-        <p>Short description here...</p>
-        <a href="#">Read More →</a>
-    </div>
-    
-    <div class="article">
-        <h2>Article Title 2</h2>
-        <p>Short description here...</p>
-        <a href="#">Read More →</a>
+    <div class="container">
+        <a href="index.html" class="back">← Back to Home</a>
+        
+        <h1>Latest Articles</h1>
+        <p class="subtitle">Quantum Security Perspectives</p>
+
+        <!-- Article 1 -->
+        <div class="article">
+            <h2>QNu Labs Named Quantum Key Distribution Industry Leader</h2>
+            <p class="meta"><strong>Date:</strong> May 15, 2026</p>
+            
+            <div class="summary">
+                <strong>Summary:</strong><br>
+                QNu Labs has been recognized as a “Global Established Leader” in the 2026 MarketsandMarkets 360Quadrants Quantum Key Distribution (QKD) evaluation. Only 17 companies were categorized as established leaders out of more than 170 reviewed.
+            </div>
+
+            <div class="perspective">
+                <strong class="section-title">Qnu's Perspective:</strong><br>
+                1. QNu Labs’ recognition validates India’s capability to build globally competitive quantum-safe cybersecurity technologies.<br>
+                2. The article reinforces India’s need for sovereign quantum communication infrastructure.<br>
+                3. Our integrated approach of QKD + PQC + QRNG + crypto-agility aligns with the global shift toward end-to-end quantum-safe ecosystems.<br>
+                4. Global leadership now depends on deployment readiness, scalability, and ecosystem partnerships.
+            </div>
+
+            <a href="https://thequantuminsider.com/2026/05/15/qnu-labs-global-quantum-key-distribution-leader/" class="read-more" target="_blank">Read Full Article →</a>
+        </div>
+
+        <!-- Article 2 -->
+        <div class="article">
+            <h2>Why Europe’s Quantum Future Depends on Talent Hubs, Not Just Tech Milestones</h2>
+            <p class="meta"><strong>Date:</strong> May 16, 2026</p>
+            
+            <div class="summary">
+                <strong>Summary:</strong><br>
+                The article emphasizes that Europe’s success in quantum computing will rely more on building strong talent ecosystems and multidisciplinary collaboration rather than just hardware breakthroughs.
+            </div>
+
+            <div class="perspective">
+                <strong class="section-title">Qnu's Perspective:</strong><br>
+                1. Building quantum talent ecosystems will be as important as developing quantum technologies themselves.<br>
+                2. QNu Labs’ collaborations with academia, government, and industry demonstrate the importance of interconnected innovation ecosystems.<br>
+                3. India needs deeper specialization in quantum hardware, photonics, and systems engineering.<br>
+                4. Commercialization success depends on multidisciplinary collaboration and practical deployment experience.
+            </div>
+
+            <a href="https://thequantuminsider.com/2026/05/16/guest-post-why-europes-quantum-future-depends-on-talent-hubs-not-just-tech-milestones/" class="read-more" target="_blank">Read Full Article →</a>
+        </div>
+
     </div>
 </body>
 </html>
