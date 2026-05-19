@@ -6,39 +6,56 @@
     <title>Qnulabs | Quantum Security</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-        
+       
         body {
             margin: 0;
             font-family: 'Poppins', sans-serif;
             background: #ffffff;
-            color: #ff6600;
-            text-align: center;
-            padding: 60px 20px;
+            color: #333;
             min-height: 100vh;
+            padding: 0;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 25px 40px;
+            background: white;
+            border-bottom: 1px solid #eee;
         }
         .logo {
-            width: 180px;
-            margin-bottom: 20px;
+            width: 160px;
+            height: auto;
         }
+
+        /* Main Content */
+        .main-content {
+            text-align: center;
+            padding: 80px 20px 100px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
         h1 {
             font-size: 4.2rem;
-            margin: 20px 0 15px;
+            margin: 30px 0 15px;
             font-weight: 700;
             color: #ff6600;
         }
         .subtitle {
-            font-size: 1.6rem;
+            font-size: 1.65rem;
             margin-bottom: 40px;
-            opacity: 0.9;
             font-weight: 500;
             color: #ff8533;
         }
         p {
             font-size: 1.35rem;
-            max-width: 800px;
+            max-width: 780px;
             margin: 0 auto 50px;
-            line-height: 1.6;
-            color: #333333;
+            line-height: 1.65;
+            color: #444;
         }
         .btn {
             display: inline-block;
@@ -59,17 +76,24 @@
     </style>
 </head>
 <body>
-    <img src="logo.png" alt="Qnulabs Logo" class="logo">
-    <h1>Qnulabs</h1>
-    <p class="subtitle">Perspective on <span style="color:#ff8533">Quantum Security</span></p>
-    
-    <p>
-        Exploring the latest developments in Quantum Computing, 
-        Post-Quantum Cryptography, and Cybersecurity in the Quantum Era.
-    </p>
-   
-    <a href="articles.html" class="btn">Latest Articles</a>
-    <a href="https://www.qnulabs.com/about-us" class="btn" target="_blank">About Qnulabs</a>
-    <a href="https://www.qnulabs.com/contact-us" class="btn" target="_blank">Get In Touch</a>
+    <!-- Header with Logo on Left -->
+    <div class="header">
+        <img src="logo.png" alt="Qnulabs Logo" class="logo">
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1>Qnulabs</h1>
+        <p class="subtitle">Perspective on <span style="color:#ff8533">Quantum Security</span></p>
+       
+        <p>
+            Exploring the latest developments in Quantum Computing, 
+            Post-Quantum Cryptography, and Cybersecurity in the Quantum Era.
+        </p>
+      
+        <a href="articles.html" class="btn">Latest Articles</a>
+        <a href="https://www.qnulabs.com/about-us" class="btn" target="_blank">About Qnulabs</a>
+        <a href="https://www.qnulabs.com/contact-us" class="btn" target="_blank">Get In Touch</a>
+    </div>
 </body>
 </html>
