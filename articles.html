@@ -6,7 +6,7 @@
     <title>Latest Articles - Qnulabs</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-        
+       
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
@@ -17,7 +17,6 @@
             position: relative;
             overflow-x: hidden;
         }
-
         /* Subtle Quantum Background */
         body::before {
             content: '';
@@ -26,7 +25,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
+            background:
                 radial-gradient(circle at 25% 30%, rgba(255, 102, 0, 0.08) 0%, transparent 50%),
                 radial-gradient(circle at 75% 70%, rgba(255, 102, 0, 0.06) 0%, transparent 50%),
                 linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
@@ -35,13 +34,11 @@
             z-index: -1;
             opacity: 0.65;
         }
-
         .container {
             max-width: 900px;
             margin: 0 auto;
             position: relative;
         }
-
         h1 {
             color: #ff6600;
             text-align: center;
@@ -123,7 +120,6 @@
             line-height: 1.85;
             color: #cbd5e1;
         }
-        /* Make numbered lists look clean */
         .summary ol, .perspective ol {
             padding-left: 25px;
             margin: 15px 0;
@@ -152,10 +148,10 @@
 <body>
     <div class="container">
         <a href="index.html" class="back">← Back to Home</a>
-        
+       
         <h1>Latest Articles</h1>
         <p class="subtitle">Quantum Security Perspectives</p>
-
+        
         <!-- ARTICLE LIST -->
         <div id="articleList" class="article-list"></div>
 
@@ -215,6 +211,32 @@
                     India can improve by creating dedicated quantum innovation clusters, increasing industry-led training programs, supporting startup incubation, and enabling faster transition from research to real-world deployment.
                 `,
                 link: "https://thequantuminsider.com/2026/05/16/guest-post-why-europes-quantum-future-depends-on-talent-hubs-not-just-tech-milestones/"
+            },
+            {
+                id: 3,
+                title: "Podcast with Bob Sorensen, Chief Quantum Analyst, Hyperion Research",
+                date: "April 20, 2026",
+                dateObj: new Date("2026-04-20"),
+                source: "The Quantum Insider",
+                summary: `
+                    The podcast focused on the growing convergence between quantum computing and high-performance computing (HPC), with Bob Sorensen explaining that HPC users are likely to become the earliest large-scale adopters of quantum technologies.
+                    Sorensen emphasized a “problem-first” adoption strategy for HPC centers: organizations should first identify computational pain points, evaluate classical solutions and costs, and only then assess whether quantum computing can deliver measurable ROI.
+                    He highlighted that successful quantum adoption will depend less on qubit metrics and more on solving real-world business problems such as reducing compute time, lowering queue delays, and improving scientific productivity.
+                    The discussion explored cloud versus on-prem quantum deployment, with Sorensen noting that cloud provides access to cutting-edge systems quickly, while on-prem infrastructure can become more economical for organizations with stable and high utilization workloads.
+                    Sorensen argued that quantum hardware will require modular upgrade paths and shorter refresh cycles compared to traditional HPC systems because quantum technology is evolving much faster than classical computing infrastructure.
+                    A major theme was that HPC managers are primarily concerned about seamless integration rather than the quantum technology itself.
+                    The podcast concluded with practical discussions on “quantum advantage,” where Sorensen explained that meaningful gains could include faster performance, solving previously impossible problems, or drastically reducing energy consumption.
+                `,
+                perspective: `
+                    The podcast’s emphasis on “problem-first quantum adoption” strongly aligns with QNu Labs’ philosophy of building deployable quantum cybersecurity solutions rather than pursuing quantum technology purely for research prestige.
+                    Bob Sorensen’s point that hybrid quantum-classical infrastructure will define early adoption is highly relevant to QNu Labs’ approach.
+                    The discussion around “real-world utility over qubit counts” reflects QNu Labs’ practical deployment mindset.
+                    The podcast highlighted the importance of sovereign quantum infrastructure, which is especially important for India.
+                    Sorensen’s comments on scalability and modularity are directly relevant to QNu’s long-term roadmap.
+                    The podcast’s focus on operational integration rather than isolated quantum hardware mirrors QNu Labs’ “platform approach.”
+                    From an India perspective, the podcast reinforces that the global quantum race is no longer only about computing supremacy — it is equally about secure communications and cyber resilience.
+                `,
+                link: "https://thequantuminsider.com/2026/05/16/podcast-with-bob-sorensen-chief-quantum-analyst-hyperion-research/"
             }
         ];
 
@@ -222,7 +244,6 @@
             const sortedArticles = [...articlesData].sort((a, b) => b.dateObj - a.dateObj);
             const listContainer = document.getElementById('articleList');
             listContainer.innerHTML = '';
-
             sortedArticles.forEach(article => {
                 const div = document.createElement('div');
                 div.className = 'article-item';
@@ -238,28 +259,27 @@
         function showArticle(id) {
             const article = articlesData.find(a => a.id === id);
             if (!article) return;
-
             const content = `
                 <h2>${article.title}</h2>
                 <p class="meta"><strong>Date:</strong> ${article.date} &nbsp;&nbsp; | &nbsp;&nbsp; <strong>Source:</strong> ${article.source}</p>
-                
+               
                 <div class="section">
                     <h3>Summary</h3>
                     <div class="summary">
                         <ol>${article.summary.trim().split('\n').map(line => `<li>${line.trim()}</li>`).join('')}</ol>
                     </div>
                 </div>
-                
+               
                 <div class="section">
                     <h3>QNu Labs Perspective</h3>
                     <div class="perspective">
                         <ol>${article.perspective.trim().split('\n').map(line => `<li>${line.trim()}</li>`).join('')}</ol>
                     </div>
                 </div>
-                
+               
                 <a href="${article.link}" target="_blank" class="btn">Read Original Article →</a>
             `;
-            
+           
             document.getElementById('detailContent').innerHTML = content;
             document.getElementById('articleList').style.display = 'none';
             document.getElementById('articleDetail').style.display = 'block';
